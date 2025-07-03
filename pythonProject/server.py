@@ -1,14 +1,21 @@
-from flask import Flask, jsonify, send_file, send_from_directory
+from flask import Flask, jsonify, send_file
 from flask_cors import CORS
 import json
-import os
 
+
+# ==========================
+# Initialize Flask App
+# ==========================
 app = Flask(__name__)
 CORS(app)  # Allow frontend requests
 
 # Paths
 JSON_FILE_PATH = "/Users/asimdhakal/PycharmProjects/pythonProject/raw_api_response.json"
 PDF_PATH = "/Users/asimdhakal/PycharmProjects/pythonProject/MasonCV.pdf"
+
+# ==========================
+# Routes
+# ==========================
 
 @app.route('/get-extracted-data', methods=['GET'])
 def get_extracted_data():
@@ -27,6 +34,8 @@ def get_extracted_data():
 @app.route('/get-pdf', methods=['GET'])
 def get_pdf():
     return send_file(PDF_PATH, mimetype='application/pdf', as_attachment=False)
-
+# ==========================
+# Entry Point
+# ==========================
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
